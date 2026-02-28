@@ -1,0 +1,97 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f4f4f4;
+            margin: 0;
+            padding: 0;
+        }
+        .container {
+            max-width: 600px;
+            margin: 20px auto;
+            background-color: #ffffff;
+            border-radius: 8px;
+            overflow: hidden;
+            box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+        }
+        .header {
+            background-color: #d9534f;
+            color: #ffffff;
+            text-align: center;
+            padding: 20px;
+        }
+        .header h1 {
+            margin: 0;
+            font-size: 24px;
+        }
+        .content {
+            padding: 20px;
+            color: #333333;
+            line-height: 1.6;
+        }
+        .warning-text {
+            color: #d9534f;
+            font-weight: bold;
+        }
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-top: 20px;
+        }
+        table, th, td {
+            border: 1px solid #dddddd;
+        }
+        th, td {
+            padding: 12px;
+            text-align: left;
+        }
+        th {
+            background-color: #f2f2f2;
+        }
+        .footer {
+            background-color: #f4f4f4;
+            color: #777777;
+            text-align: center;
+            padding: 15px;
+            font-size: 12px;
+            border-top: 1px solid #eeeeee;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="header">
+            <h1>Urgent: Missing Student Alert</h1>
+        </div>
+        <div class="content">
+            <p>Hello,</p>
+            <p>This is an automated alert from the Transport Management System. The following students <strong class="warning-text">HAVE NOT BOARDED</strong> Bus <strong>{{ bus_number }}</strong> for the <strong>{{ trip_type|title }}</strong> trip.</p>
+            
+            <table>
+                <thead>
+                    <tr>
+                        <th>Student Name</th>
+                        <th>Parent Contact</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    {% for student in missing_students %}
+                    <tr>
+                        <td>{{ student.username }}</td>
+                        <td>{{ student.parent_contact }}</td>
+                    </tr>
+                    {% endfor %}
+                </tbody>
+            </table>
+            
+            <p>Please take appropriate action immediately to ensure their safety.</p>
+            <p>Regards,<br><strong>Transport Management System</strong></p>
+        </div>
+        <div class="footer">
+            <p>This email was generated automatically. Please do not reply directly to this message.</p>
+        </div>
+    </div>
+</body>
+</html>
